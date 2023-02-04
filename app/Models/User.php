@@ -26,6 +26,8 @@ class User extends Authenticatable implements JWTSubject
         'phone_verified_at' => 'datetime',
     ];
 
+    protected $guard = 'admin';
+
     /**
      * The attributes that should be hidden for serialization.
      *

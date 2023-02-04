@@ -1,6 +1,7 @@
 <?php
 
-use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\Auth\AuthController;
+use App\Http\Controllers\Api\UserManagement\UserManagementController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,4 +22,11 @@ Route::prefix('v1')
             Route::post('register', 'register');
             Route::get('logout', 'logout');
         });
-    });
+    })
+    ->controller(UserManagementController::class)
+    ->group(function (){
+        Route::get('get-users', 'index');
+      /*  Route::post('store', 'store');
+        Route::delete('delete/{id}', 'destroy');
+        Route::put('update/{id}', 'update');*/
+    });;
