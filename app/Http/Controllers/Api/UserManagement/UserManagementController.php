@@ -53,9 +53,11 @@ class UserManagementController extends Controller
      */
     public function store(StoreUserRequest $request)
     {
+        dump($request->all());
+
         if (!auth()->guard('admin'))
         {
-            return ApiResponse::fail('Unauthorized');
+            return ApiResponse::forbidden('Unauthorized');
         }
         $user = User::create([
             'username' => $request->username,
@@ -103,14 +105,21 @@ class UserManagementController extends Controller
         {
             return ApiResponse::forbidden('Unauthorized');
         }
-        Log::info($request->all());
+        dump($request->all());
         $user = User::find($id);
         if (!$user)
         {
             return ApiResponse::fail('User Not Found');
         }
-        $user->update($request->all());
-        return ApiResponse::success([$user], 200);
+        $user->update([
+            'username' => $request->username,
+            'phone' => $request->phone,
+            'password' => Hash::make($request->password),
+            'type' => $request->type,
+        ]);
+        return ApiResponse::success([
+            $user
+        ], 200);
     }
 
 
@@ -124,7 +133,7 @@ class UserManagementController extends Controller
     {
         if (!auth()->guard('admin'))
         {
-            return ApiResponse::fail('Unauthorized');
+            return ApiResponse::forbidden('Unauthorized');
         }
         $user = User::find($id);
         if(!$user){
