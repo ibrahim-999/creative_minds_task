@@ -11,7 +11,7 @@ return [
     |
     */
 
-    'base_url' => env('APP_URL', 'http://localhost'),
+    'base_url' => env('APP_URL', 'http://localhost:8000'),
 
     /*
     |--------------------------------------------------------------------------
@@ -35,8 +35,8 @@ return [
     |
     */
 
-    'structured' => false,
-    'crud_folders' => true,
+    'structured' => true,
+    'crud_folders' => false,
 
     /*
     |--------------------------------------------------------------------------
@@ -93,7 +93,7 @@ return [
     |
     */
 
-    'enable_formdata' => false,
+    'enable_formdata' => true,
 
     /*
     |--------------------------------------------------------------------------
