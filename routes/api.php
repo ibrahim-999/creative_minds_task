@@ -26,7 +26,7 @@ Route::prefix('v1')
     ->controller(UserManagementController::class)
     ->group(function (){
         Route::get('get-users', 'index');
-      /*  Route::post('store', 'store');
+        Route::post('store', 'store');
+        Route::put('update/{id}', 'update');
         Route::delete('delete/{id}', 'destroy');
-        Route::put('update/{id}', 'update');*/
     });;
