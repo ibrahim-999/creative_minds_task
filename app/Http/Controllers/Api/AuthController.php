@@ -14,14 +14,15 @@ class AuthController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login','register']]);
+        $this->middleware('auth:api', ['except' => ['login', 'register', 'logout']]);
     }
-    public function register(RegisterRequest $request){
-
+    public function register(RegisterRequest $request)
+    {
         $user = User::create([
             'username' => $request->username,
             'phone' => $request->phone,
             'password' => Hash::make($request->password),
+            'type' => $request->type,
         ]);
         $plainTextToken = auth()->login($user);
         return ApiResponse::success([
@@ -44,16 +45,5 @@ class AuthController extends Controller
         return ApiResponse::success([
             'message' => 'Successfully logged out',
         ], 201);
-    }
-    public function refresh()
-    {
-        return response()->json([
-            'status' => 'success',
-            'user' => Auth::user(),
-            'authorisation' => [
-                'token' => Auth::refresh(),
-                'type' => 'bearer',
-            ]
-        ]);
     }
 }

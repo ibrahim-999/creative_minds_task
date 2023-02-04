@@ -16,7 +16,7 @@ class RegisterRequest extends ApiFormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -28,8 +28,9 @@ class RegisterRequest extends ApiFormRequest
     {
         return [
             'username' => 'required|string|max:255',
-            'phone' => 'required', 'max:255', Rule::unique(User::class),
+            'phone' => 'required|max:255|unique:users',
             'password' => 'required',
+            'type' => 'nullable|string',
         ];
     }
 }
