@@ -18,6 +18,7 @@ class AuthController extends Controller
     }
     public function register(RegisterRequest $request)
     {
+        dump($request->all());
         $user = User::create([
             'username' => $request->username,
             'phone' => $request->phone,
@@ -31,6 +32,7 @@ class AuthController extends Controller
     }
     public function login(LoginRequest $request)
     {
+        dump($request->all());
         if (auth()->attempt($request->only('phone', 'password'))) {
             auth()->user()->tokens()->delete();
             return ApiResponse::success([
