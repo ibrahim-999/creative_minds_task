@@ -77,8 +77,9 @@ class User extends Authenticatable implements JWTSubject
 
         $client->calls->create(
             $this->phone,
-            "+15306658566", // REPLACE WITH YOUR TWILIO NUMBER
-            ["url" => "http://your-ngrok-url>/build-twiml/{$code}"]
+            //at this point you can use your own phone and https ngrok url
+            "+201143264502", // REPLACE WITH YOUR TWILIO NUMBER
+            ["url" => "http://127.0.0.8000/build-twiml/{$code}"]
         );
     }
 }
