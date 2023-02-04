@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
+use Twilio\Rest\Client;
 
 class User extends Authenticatable implements JWTSubject
 {
@@ -62,5 +63,22 @@ class User extends Authenticatable implements JWTSubject
     public function getJWTCustomClaims(): array
     {
         return [];
+    }
+
+    public function callToVerify()
+    {
+        $code = random_int(100000, 999999);
+
+        $this->forceFill([
+            'verification_code' => $code
+        ])->save();
+
+        $client = new Client(env('TWILIO_SID'), env('TWILIO_AUTH_TOKEN'));
+
+        $client->calls->create(
+            $this->phone,
+            "+15306658566", // REPLACE WITH YOUR TWILIO NUMBER
+            ["url" => "http://your-ngrok-url>/build-twiml/{$code}"]
+        );
     }
 }
