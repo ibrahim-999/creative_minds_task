@@ -82,13 +82,6 @@ php artisan serve
 http://127.0.0.1:8000
 ```
 
-## Task Expectations
-
-provided 2 APIs for any consumer(ex: web app, mobile app,...)
-- User can book a seat if there is an available seat.
-- User can get a list of available seats to be booked for his trip by sending start and end
-- Postman collection to test Apis
-
 ## Additional requirements 
 - you need to register to Twilio WebSite to get your account verified and in order to ues the service
 - ``` https://www.twilio.com/```
