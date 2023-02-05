@@ -96,8 +96,8 @@ provided 2 APIs for any consumer(ex: web app, mobile app,...)
 - ``TWILIO_SID,TWILIO_AUTH_TOKEN`` for twilio package
 - you need to generate jwt keys by writing this command 
 ```
-  JWT_SECRET=xxxxxxxx
   php artisan jwt:secret
+  JWT_SECRET=xxxxxxxx
 ```
 
 ## Author
